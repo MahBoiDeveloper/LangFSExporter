@@ -1,5 +1,8 @@
 # LangFSExporter
 Simple tool for extracting names of the game objects for the further translation `LangFS.ini` file. Based on ini parser from [Rampastring.Tools](https://github.com/Rampastring/Rampastring.Tools/releases).
+## System requirements
+* .NET Framework 4.8 (supports Win 7 and newer)
+
 ## How to use
 There a severals way to use executable:
 1. Drop `LangFSExporter.exe` to the game folder with `Rules.ini` and launch it
