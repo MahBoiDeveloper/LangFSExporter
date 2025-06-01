@@ -7,13 +7,17 @@ namespace LangFSExporter
 {
     class Program
     {
-        static void Main(string[] args)
+        private static string[] helpFlagVariations = { "/?", "-h", "/h", "-help", "/help", "--help" };
+        public static void Main(string[] args)
         {
             string input = "Rules.ini", output = "LangFS.ini";
-            if (CheckForHelpFlag(args))
+            foreach (string flag in helpFlagVariations)
             {
-                PrintHelp();
-                return;
+                if (args.Contains(flag))
+                {
+                    PrintHelp();
+                    return;
+                }
             }
 
             switch (args.Length)
@@ -70,50 +74,30 @@ namespace LangFSExporter
                 }
             }
         }
-        static void PrintHelp()
-        {
-            Console.WriteLine("LangFS Names Exporter by mah_boi\n" +
-                              "Powered with Rampastring.Tool by Rampastring\n\n" +
-                              
-                              "This utillity export all sections that contains Name key.\n" +
-                              "It must help you with finding and preparing LangFS.ini file\n" +
-                              "for next translation it to any language.\n\n" +
+        private static void PrintHelp()
+            =>
+                Console.WriteLine
+                (
+                    """
+                    LangFS Names Exporter by mah_boi
+                    Powered with Rampastring.Tool by Rampastring
+                                  
+                    This utillity export all sections that contains Name key.
+                    It must help you with finding and preparing LangFS.ini file
+                    for next translation it to any language.
 
-                              "Available flags:\n" +
-                              "\t-h, -help, --help, /?, /h, /help -- prints info about utility\n" +
-                              "\t-i, --input                      -- set path to Rules.ini file\n" +
-                              "\t-o, --output                     -- set path to LangFS.ini file\n\n" +
+                    Available flags:
+                        -h, -help, --help, /?, /h, /help -- prints info about utility
+                        -i, --input                      -- set path to Rules.ini file
+                        -o, --output                     -- set path to LangFS.ini file
 
-                              "Arguments example:\n" +
-                              "\tLangFSExporter --help\n" +
-                              "\tLangFSExporter rules.ini\n" +
-                              "\tLangFSExporter rules.ini language.ini\n" +
-                              "\tLangFSExporter -i ..\\src\\rules.ini -o langfs.txt\n" +
-                              "\tLangFSExporter --input src\\rules.ini --output src\\langfs.ini\n");
-        }
-        static bool CheckForHelpFlag(string[] args)
-        {
-            foreach (var flag in args)
-            {
-                switch(flag)
-                {
-                    case "/?":
-                        return true;
-                    case "-h":
-                        return true;
-                    case "/h":
-                        return true;
-                    case "-help":
-                        return true;
-                    case "/help":
-                        return true;
-                    case "--help":
-                        return true;
-                    default:
-                        break;
-                }
-            }
-            return false;
-        }
+                    Arguments example:
+                        LangFSExporter --help
+                        LangFSExporter rules.ini
+                        LangFSExporter rules.ini language.ini
+                        LangFSExporter -i ..\src\rules.ini -o langfs.txt
+                        LangFSExporter --input src\rules.ini --output src\langfs.
+                    """
+                );
     }
 }
